@@ -8,7 +8,10 @@ const app = expres();
 // ALTLTpEaBEW7MZUx
 
 // middleware
-app.use(cors());
+app.use(cors({
+    origin: 'https://a10-crowdcube-client.vercel.app/',
+    credentials: true,
+}));
 app.use(expres.json());
 
 

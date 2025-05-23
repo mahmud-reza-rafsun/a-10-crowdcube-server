@@ -28,23 +28,23 @@ async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
-        const productCollection = client.db('productsDB').collection('products');
+        const campaignCollection = client.db('campaignDB').collection('campaign');
 
-        app.post('/products', async (req, res) => {
+        app.post('/campaign', async (req, res) => {
             const data = req.body;
             console.log(data);
-            const result = await productCollection.insertOne(data);
+            const result = await campaignCollection.insertOne(data);
             res.send(result);
         })
 
-        app.get('/products', async (req, res) => {
-            const cursor = await productCollection.find().toArray();
+        app.get('/campaign', async (req, res) => {
+            const cursor = await campaignCollection.find().toArray();
             res.send(cursor);
         })
-        app.get('/products/:id', async (req, res) => {
+        app.get('/campaign/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
-            const result = await productCollection.findOne(query);
+            const result = await campaignCollection.findOne(query);
             res.send(result);
         })
 

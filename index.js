@@ -8,10 +8,7 @@ const app = expres();
 // ALTLTpEaBEW7MZUx
 
 // middleware
-app.use(cors({
-    origin: 'https://a10-crowdcube-client.vercel.app/',
-    credentials: true,
-}));
+app.use(cors());
 app.use(expres.json());
 
 
@@ -41,13 +38,19 @@ async function run() {
         })
 
         app.get('/campaign', async (req, res) => {
-            const cursor = await campaignCollection.find().toArray();
+            const cursor = await campaignCollection.find().limit(6).toArray();
             res.send(cursor);
         })
         app.get('/campaign/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
             const result = await campaignCollection.findOne(query);
+            res.send(result);
+        })
+        app.delete('/campaign/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await campaignCollection.deleteOne(query);
             res.send(result);
         })
 

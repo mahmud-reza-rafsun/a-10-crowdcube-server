@@ -53,6 +53,23 @@ async function run() {
             const result = await campaignCollection.deleteOne(query);
             res.send(result);
         })
+        app.put('/campaign/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            const campaign = req.body;
+            const campaignDoc = {
+                $set: {
+                    title: campaign.title,
+                    photo: campaign.photo,
+                    type: campaign.type,
+                    description: campaign.description,
+                    ammount: campaign.ammount
+                }
+            }
+            const newCampaign = await campaignCollection.updateOne(query, campaignDoc, options);
+            res.send(newCampaign);
+        })
 
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });

@@ -13,7 +13,7 @@ app.use(expres.json());
 
 
 
-const uri = "mongodb+srv://crowdcube:ALTLTpEaBEW7MZUx@cluster1.ladfrnr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster1.ladfrnr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {

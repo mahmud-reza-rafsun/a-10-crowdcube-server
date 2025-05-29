@@ -14,8 +14,6 @@ app.use(cors());
 app.use(expres.json());
 
 
-
-console.log(process.env.DB_PASS);
 const uri = `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster1.ladfrnr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
